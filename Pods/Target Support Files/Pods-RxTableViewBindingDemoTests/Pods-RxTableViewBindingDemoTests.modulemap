@@ -1,0 +1,6 @@
+framework module Pods_RxTableViewBindingDemoTests {
+  umbrella header "Pods-RxTableViewBindingDemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
