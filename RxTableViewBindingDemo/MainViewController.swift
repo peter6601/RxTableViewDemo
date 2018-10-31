@@ -11,24 +11,51 @@ import RxSwift
 import RxCocoa
 
 class MainViewController: UIViewController {
-
+    
     @IBOutlet weak var mainTableView: UITableView! {
         didSet {
             mainTableView.dataSource = self
             mainTableView.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: "ItemTableViewCell")
-
         }
     }
     var viewModel:  MainViewModel!
-    
+    @IBAction func tappedAdd(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toReport", sender: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let input = MainViewModel.Input.init(viewDidLoad: self.rx.sentMessage(#selector(MainViewController.viewDidAppear(_:))).map({ _ in }))
+        bind()
+    }
+    
+    func bind() {
+        let input = MainViewModel.Input.init()
         let data = MainViewModel.Dependency.init()
         viewModel = MainViewModel(with: data)
         viewModel.bind(input)
+        viewModel.output.listData.asObservable().subscribe(onNext: { [weak self] (_) in
+            self?.mainTableView.reloadData()
+        })
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "toReport" else {
+            return 
+        }
+        if let vc = segue.destination as? ReportViewController {
+            vc.delegate = self
+            vc.viewModelBind(ReportViewModel.init())
+        }
         
+    }
+}
+
+extension  MainViewController: ReportViewControllerDelegate {
+    func addReport(_ report: Report) {
+        var list = viewModel.output.listData.value
+        list.append(report)
+        viewModel.output.listData.accept(list)
     }
 }
 
@@ -44,6 +71,4 @@ extension MainViewController: UITableViewDataSource {
         cell?.llcontent.text = data.content
         return cell!
     }
-    
-    
 }

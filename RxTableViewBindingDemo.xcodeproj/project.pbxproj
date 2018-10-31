@@ -10,6 +10,11 @@
 		080B60D16EAF4CA7D9921770 /* Pods_RxTableViewBindingDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E650964AB0E186F56C48839 /* Pods_RxTableViewBindingDemoUITests.framework */; };
 		4E7DFC9F8C78C5DAADBFEF94 /* Pods_RxTableViewBindingDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1017E975BCAA71DD19E3EDEE /* Pods_RxTableViewBindingDemoTests.framework */; };
 		63E59F772E86F56C77372101 /* Pods_RxTableViewBindingDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB81CB39925CDB339DB3915 /* Pods_RxTableViewBindingDemo.framework */; };
+		DA20256B2189498F004F6DE5 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20256A2189498F004F6DE5 /* ReportViewModel.swift */; };
+		DA20256D2189AA9F004F6DE5 /* ViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20256C2189AA9F004F6DE5 /* ViewModelTest.swift */; };
+		DA20256F2189AB24004F6DE5 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20256A2189498F004F6DE5 /* ReportViewModel.swift */; };
+		DA2025702189AB2F004F6DE5 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD52DF42187F12F003C9F03 /* ViewModelType.swift */; };
+		DA2025712189ABC3004F6DE5 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD52DFE2188006A003C9F03 /* Report.swift */; };
 		DAD52DC52187ED78003C9F03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD52DC42187ED78003C9F03 /* AppDelegate.swift */; };
 		DAD52DC72187ED78003C9F03 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD52DC62187ED78003C9F03 /* MainViewController.swift */; };
 		DAD52DCA2187ED78003C9F03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD52DC82187ED78003C9F03 /* Main.storyboard */; };
@@ -50,6 +55,8 @@
 		227A705EFA8A73B52B7C0DD9 /* Pods-RxTableViewBindingDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxTableViewBindingDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxTableViewBindingDemoTests/Pods-RxTableViewBindingDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6BB81CB39925CDB339DB3915 /* Pods_RxTableViewBindingDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxTableViewBindingDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D541B1C93903869E400765C5 /* Pods-RxTableViewBindingDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxTableViewBindingDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxTableViewBindingDemo/Pods-RxTableViewBindingDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		DA20256A2189498F004F6DE5 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		DA20256C2189AA9F004F6DE5 /* ViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTest.swift; sourceTree = "<group>"; };
 		DAD52DC12187ED78003C9F03 /* RxTableViewBindingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxTableViewBindingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD52DC42187ED78003C9F03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAD52DC62187ED78003C9F03 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +161,7 @@
 				DAD52DFC2187FF3F003C9F03 /* MainViewModel.swift */,
 				DAD52DFE2188006A003C9F03 /* Report.swift */,
 				DAD52DF62187F27A003C9F03 /* ReportViewController.swift */,
+				DA20256A2189498F004F6DE5 /* ReportViewModel.swift */,
 				DAD52DF42187F12F003C9F03 /* ViewModelType.swift */,
 				DAD52DC82187ED78003C9F03 /* Main.storyboard */,
 				DAD52DF82187FD60003C9F03 /* ItemTableViewCell.swift */,
@@ -168,6 +176,7 @@
 		DAD52DD82187ED7A003C9F03 /* RxTableViewBindingDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA20256C2189AA9F004F6DE5 /* ViewModelTest.swift */,
 				DAD52DD92187ED7A003C9F03 /* RxTableViewBindingDemoTests.swift */,
 				DAD52DDB2187ED7A003C9F03 /* Info.plist */,
 			);
@@ -412,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA20256B2189498F004F6DE5 /* ReportViewModel.swift in Sources */,
 				DAD52DF72187F27A003C9F03 /* ReportViewController.swift in Sources */,
 				DAD52DC72187ED78003C9F03 /* MainViewController.swift in Sources */,
 				DAD52DFF2188006B003C9F03 /* Report.swift in Sources */,
@@ -426,6 +436,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2025702189AB2F004F6DE5 /* ViewModelType.swift in Sources */,
+				DA2025712189ABC3004F6DE5 /* Report.swift in Sources */,
+				DA20256F2189AB24004F6DE5 /* ReportViewModel.swift in Sources */,
+				DA20256D2189AA9F004F6DE5 /* ViewModelTest.swift in Sources */,
 				DAD52DDA2187ED7A003C9F03 /* RxTableViewBindingDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

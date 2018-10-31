@@ -12,7 +12,6 @@ import RxCocoa
 
 class MainViewModel: ViewModelDependencyType, ViewModelBindingType {
     
-    
     var input: MainViewModel.Input!  
     var output: MainViewModel.Output!
     var dependency: MainViewModel.Dependency!
@@ -26,7 +25,8 @@ class MainViewModel: ViewModelDependencyType, ViewModelBindingType {
         var listData: BehaviorRelay<[Report]>
     }
     struct Input {
-        let viewDidLoad:Observable<Void>
+//       var viewDidLoad: Observable<Void>
+
     }
     
     required init(with dependency: MainViewModel.Dependency) {
@@ -35,10 +35,10 @@ class MainViewModel: ViewModelDependencyType, ViewModelBindingType {
     
     func bind(_ bindings: Input) {
         let listData: BehaviorRelay<[Report]> = BehaviorRelay.init(value: [])      
-        bindings.viewDidLoad.asObservable().subscribe(onNext: { (_) in
-            let list = [Report(title: "1", content: "1111", userName: "reset", printScreen: nil)]
+//        bindings.viewDidLoad.asObservable().subscribe(onNext: { (_) in
+            let list = [Report(title: "Problem", content: "report content", userName: "reset", printScreen: nil)]
             listData.accept(list)
-        }).disposed(by: disposeBag)
+//        }).disposed(by: disposeBag)
        output = Output.init(listData: listData)
     }
     

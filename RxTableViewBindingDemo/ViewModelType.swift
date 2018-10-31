@@ -28,5 +28,5 @@ protocol ViewModelBindingType {
     associatedtype Input
     associatedtype Output
     var input: Input! { get}
-    var output: Output! { get}
+    var output: Output! { get set }
 }

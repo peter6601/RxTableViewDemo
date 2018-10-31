@@ -7,24 +7,57 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
+
+protocol ReportViewControllerDelegate: class {
+    func addReport(_ report: Report)
+}
 class ReportViewController: UIViewController {
 
+    @IBOutlet weak var ttName: UITextField!
+    @IBOutlet weak var ttContent: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
+    
+    @IBAction func send(_ sender: UIButton) {
+        
+        
+    }
+    var disposeBag: DisposeBag = DisposeBag()
+    var viewModel: ReportViewModel!
+    weak var delegate: ReportViewControllerDelegate? 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
 
-        // Do any additional setup after loading the view.
+    }
+    
+    func viewModelBind(_ viewModel: ReportViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    private func bind() {
+        viewModel.input.viewDidLoad()
+        let sb = sendButton.rx.tap.asObservable()
+        let un = ttName.rx.text.asObservable()
+        let ct = ttContent.rx.text.asObservable()
+        let input = ReportViewModel.Input.init(didTapButton: sb, userName: un, problem: ct)
+        viewModel.bind(with: input)
+        viewModel.output.newReport.asObservable().subscribe { [weak self](newReport) in
+            guard let  new = newReport.element, let newOne = new else {
+                return 
+            }
+            self?.delegate?.addReport(newOne)
+            print("josee's new report \(newReport)")
+            self?.navigationController?.popViewController(animated: true)
+        }.disposed(by: disposeBag)
+        
+     
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

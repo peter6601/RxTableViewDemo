@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wx6-vP-jYv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wx6-vP-jYv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,21 +32,25 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="zym-4s-dKp">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="1gy-Qb-SgZ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="1gy-Qb-SgZ">
+                            <connections>
+                                <action selector="tappedAdd:" destination="BYZ-38-t0r" id="7OT-w7-APm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mainTableView" destination="GoL-kf-mKb" id="r2h-oL-lMv"/>
-                        <segue destination="4tk-Vq-x4A" kind="show" id="jxr-If-VU7"/>
+                        <segue destination="4tk-Vq-x4A" kind="show" identifier="toReport" id="jxr-If-VU7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1079.2" y="132.68365817091455"/>
         </scene>
-        <!--View Controller-->
+        <!--Report View Controller-->
         <scene sceneID="fMc-Nj-HqY">
             <objects>
-                <viewController id="4tk-Vq-x4A" sceneMemberID="viewController">
+                <viewController id="4tk-Vq-x4A" customClass="ReportViewController" customModule="RxTableViewBindingDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aX1-T1-tgT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,6 +90,9 @@
                                 <state key="normal" title="Click">
                                     <color key="titleColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="send:" destination="4tk-Vq-x4A" eventType="touchUpInside" id="AMO-xM-sdg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -99,6 +106,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8dT-Jh-Akr"/>
                     </view>
+                    <connections>
+                        <outlet property="sendButton" destination="ZBD-3K-6vx" id="kMI-0F-EGn"/>
+                        <outlet property="ttContent" destination="oeI-90-QD6" id="QuD-6t-G4i"/>
+                        <outlet property="ttName" destination="Kqs-1C-dUD" id="kd4-6M-df2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DnR-7l-6nT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
