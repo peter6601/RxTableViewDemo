@@ -26,7 +26,8 @@ class ViewModelTest: XCTestCase {
     
     func testCreateReport() {
         let viewModel = ReportViewModel.init()
-        viewModel.output.newReport.asObserver().subscribe { (report) in
+        viewModel.viewDidLoad()
+        viewModel.output.newReport.asObservable().subscribe { (report) in
             guard let aReport = report.element, let newReport = aReport else {
                 return
             }

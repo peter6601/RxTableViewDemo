@@ -44,6 +44,7 @@ class ReportViewController: UIViewController {
         let sb = sendButton.rx.tap.asObservable()
         let un = ttName.rx.text.asObservable()
         let ct = ttContent.rx.text.asObservable()
+        
         let input = ReportViewModel.Input.init(didTapButton: sb, userName: un, problem: ct)
         viewModel.bind(with: input)
         viewModel.output.newReport.asObservable().subscribe { [weak self](newReport) in
@@ -51,7 +52,6 @@ class ReportViewController: UIViewController {
                 return 
             }
             self?.delegate?.addReport(newOne)
-            print("josee's new report \(newReport)")
             self?.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
         

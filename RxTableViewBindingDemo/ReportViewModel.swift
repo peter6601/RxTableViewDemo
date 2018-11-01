@@ -12,8 +12,6 @@ import RxCocoa
 
 protocol ReportViewModelInput {
     func viewDidLoad()
-    func inputUserName(_ userName: String?)
-    func inputProblem(_ problem: String?)
 }
 protocol ReprotViewModelOutout {
     var newReport: PublishSubject<Report?> {get set}
@@ -51,21 +49,29 @@ class ReportViewModel: ViewModelDependencyType, ReportViewModelInput, ReprotView
         //API
     }
     
-    func inputUserName(_ userName: String?) {
-        self.userName.onNext(userName)
-    }
-    
-    func inputProblem(_ problem: String?) {
-        self.content.onNext(problem)
-    }
-    
     func bind(with bindings: ReportViewModel.Input) {
-         bindings.didTapButton.withLatestFrom(bindings.problem).withLatestFrom(bindings.userName) { (p, c) -> Report in
-            let report = Report.init(title: c, content: p, userName: c ?? "", printScreen: nil)
-            return report
-            }.subscribe { (report) in
-                self.output.newReport.on(report) 
+        
+        bindings.problem.subscribe { [weak self](event) in
+            self?.content.on(event)
+            print("content \(event)")
         }.disposed(by: disposBag)
+    
+        bindings.userName.subscribe(onNext: { [weak self](user) in
+            self?.userName.onNext(user)
+            print("userName \(user)")
+        }).disposed(by: disposBag)
+        
+        bindings.didTapButton.subscribe { (_) in
+            let report = Report.init(title: self.userName.value(), content: self.content.value(), userName: self.userName.value() ?? "", printScreen: nil)
+            self.output.newReport.onNext(report) 
+        }.disposed(by: disposBag)
+        
+//         bindings.didTapButton.withLatestFrom(content.asObservable()).withLatestFrom(userName.asObservable()) { (p, c) -> Report in
+//            let report = Report.init(title: c, content: p, userName: c ?? "", printScreen: nil)
+//            return report
+//            }.subscribe { (report) in
+//                self.output.newReport.on(report) 
+//        }.disposed(by: disposBag)
      
     }
 }

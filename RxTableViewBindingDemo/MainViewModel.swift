@@ -12,7 +12,8 @@ import RxCocoa
 
 class MainViewModel: ViewModelDependencyType, ViewModelBindingType {
     
-    var input: MainViewModel.Input!  
+
+    var input: MainViewModel.Input! 
     var output: MainViewModel.Output!
     var dependency: MainViewModel.Dependency!
     let disposeBag: DisposeBag = DisposeBag()
@@ -31,6 +32,7 @@ class MainViewModel: ViewModelDependencyType, ViewModelBindingType {
     
     required init(with dependency: MainViewModel.Dependency) {
         self.dependency = dependency
+        
     }
     
     func bind(_ bindings: Input) {
