@@ -21,9 +21,6 @@ protocol Client: ViewModelDependencyType {
     init(client: Client) 
 }
 
-
-
-
 protocol ViewModelBindingType {
     associatedtype Input
     associatedtype Output

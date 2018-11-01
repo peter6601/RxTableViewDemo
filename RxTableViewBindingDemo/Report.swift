@@ -9,10 +9,10 @@
 import Foundation
 
 struct Report:Codable {
-    let title:String?
-    let content:String?
-    let userName:String?
-    let printScreen:URL?
+    var title:String?
+    var content:String?
+    var userName:String?
+    var printScreen:URL?
     private enum CodingKeys:String,CodingKey {
         case title
         case content

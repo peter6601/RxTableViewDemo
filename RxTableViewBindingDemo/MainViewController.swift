@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var mainTableView: UITableView! {
         didSet {
             mainTableView.dataSource = self
+            mainTableView.delegate = self
             mainTableView.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: "ItemTableViewCell")
         }
     }
@@ -45,7 +46,14 @@ class MainViewController: UIViewController {
         }
         if let vc = segue.destination as? ReportViewController {
             vc.delegate = self
-            vc.viewModelBind(ReportViewModel.init())
+            if let tag = sender as? Int {
+                let report = viewModel.output.listData.value[tag]
+                let model = ReportViewModel.init(with: ReportViewModel.Dependency.init(report: report, tag: tag))
+                vc.viewModelBind(model)
+            } else {
+                vc.viewModelBind(ReportViewModel.init())
+
+            }
         }
         
     }
@@ -55,6 +63,11 @@ extension  MainViewController: ReportViewControllerDelegate {
     func addReport(_ report: Report) {
         var list = viewModel.output.listData.value
         list.append(report)
+        viewModel.output.listData.accept(list)
+    }
+    func editedReport(_ report: Report, row: Int) {
+        var list = viewModel.output.listData.value
+        list[row] = report
         viewModel.output.listData.accept(list)
     }
 }
@@ -70,5 +83,11 @@ extension MainViewController: UITableViewDataSource {
         cell?.llName.text = data.title
         cell?.llcontent.text = data.content
         return cell!
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toReport", sender: indexPath.row)
     }
 }

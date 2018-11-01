@@ -12,6 +12,7 @@ import RxCocoa
 
 class MainViewModel: ViewModelDependencyType, ViewModelBindingType {
     
+    
 
     var input: MainViewModel.Input! 
     var output: MainViewModel.Output!
