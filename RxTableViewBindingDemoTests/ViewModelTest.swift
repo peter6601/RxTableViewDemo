@@ -24,17 +24,14 @@ class ViewModelTest: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    func testCreateReport() {
-
-        let tag = 1
-        let model = ReportViewModel.Dependency.init()
-        let viewModel = ReportViewModel.init(with: model)
+    func testCreateReport() { 
+        let viewModel = ReportViewModel.init()
         viewModel.input.viewDidLoad()
         viewModel.output.newReport.asObserver().subscribe(onNext: { (dependency) in
             guard let report = dependency.report else {
                 return
             }
-            if let tag = dependency.tag {
+            if let _ = dependency.tag {
             } else {
                 XCTAssertEqual(report.userName, "user2", report.userName ?? "")
                 XCTAssertEqual(report.content, "problem", report.content ?? "")
@@ -45,8 +42,9 @@ class ViewModelTest: XCTestCase {
         let sb = PublishSubject<Void>()
         let un: BehaviorSubject<String?> = BehaviorSubject.init(value: nil)
         let ct: BehaviorSubject<String?> = BehaviorSubject.init(value: nil)
-        let input = ReportViewModel.Input.init(didTapButton: sb.asObservable(), userName: un.asObservable(), problem: ct.asObservable())
-        viewModel.input.bind(with: input)
+        viewModel.input.bindProblem(ct.asObservable())
+        viewModel.input.bindUserName(un.asObservable())
+        viewModel.input.bindtapButton(sb.asObservable())
         un.onNext("user2")
         ct.onNext("problem")
         sb.onNext(())
@@ -58,16 +56,14 @@ class ViewModelTest: XCTestCase {
         let model = ReportViewModel.Dependency.init(report: report, tag: tag)
         let viewModel = ReportViewModel.init(with: model)
         viewModel.input.viewDidLoad()
+
         viewModel.output.newReport.asObserver().subscribe(onNext: { (dependency) in
             guard let report = dependency.report else {
                 return
             }
-            if let tag = dependency.tag {
+            if let _ = dependency.tag {
                 XCTAssertEqual(report.userName, "user2", report.userName ?? "")
                 XCTAssertEqual(report.content, "problem", report.content ?? "")
-            } else {
-                XCTAssertEqual(report.userName, "user2", report.userName ?? "")
-                XCTAssertEqual(report.content, "problem2", report.content ?? "")
             }
             
         }).disposed(by: disposeBag)
@@ -75,10 +71,37 @@ class ViewModelTest: XCTestCase {
         let sb = PublishSubject<Void>()
         let un: BehaviorSubject<String?> = BehaviorSubject.init(value: nil)
         let ct: BehaviorSubject<String?> = BehaviorSubject.init(value: nil)
-        let input = ReportViewModel.Input.init(didTapButton: sb.asObservable(), userName: un.asObservable(), problem: ct.asObservable())
-        viewModel.input.bind(with: input)
+        viewModel.input.bindProblem(ct.asObservable())
+        viewModel.input.bindUserName(un.asObservable())
+        viewModel.input.bindtapButton(sb.asObservable())
         un.onNext("user2")
         ct.onNext("problem")
+        sb.onNext(())
+    }
+    
+    func testEmptyReport() {
+        let report = Report(title: "user1", content: "problem1", userName: "user1", printScreen: nil)
+        let tag = 1
+        let model = ReportViewModel.Dependency.init(report: report, tag: tag)
+        let viewModel = ReportViewModel.init(with: model)
+        viewModel.input.viewDidLoad()
+        
+        viewModel.output.newReport.asObserver().subscribe(onNext: { (dependency) in
+            guard let report = dependency.report else {
+                return
+            }
+            XCTAssertEqual(report.userName, nil, report.userName ?? "")
+            XCTAssertEqual(report.content, nil, report.content ?? "")
+        }).disposed(by: disposeBag)
+        
+        let sb = PublishSubject<Void>()
+        let un: BehaviorSubject<String?> = BehaviorSubject.init(value: nil)
+        let ct: BehaviorSubject<String?> = BehaviorSubject.init(value: nil)
+        viewModel.input.bindProblem(ct.asObservable())
+        viewModel.input.bindUserName(un.asObservable())
+        viewModel.input.bindtapButton(sb.asObservable())
+        un.onNext(nil)
+        ct.onNext(nil)
         sb.onNext(())
     }
     

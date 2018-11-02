@@ -19,7 +19,7 @@ struct Report:Codable {
         case userName
         case printScreen
     }
-    init(title:String?, content:String?,userName:String, printScreen:URL? ) {
+    init(title:String?, content:String?,userName:String?, printScreen:URL? ) {
         self.title = title
         self.content = content
         self.userName = userName

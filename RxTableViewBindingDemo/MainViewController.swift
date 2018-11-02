@@ -48,10 +48,9 @@ class MainViewController: UIViewController {
             vc.delegate = self
             if let tag = sender as? Int {
                 let report = viewModel.output.listData.value[tag]
-                let model = ReportViewModel.init(with: ReportViewModel.Dependency.init(report: report, tag: tag))
-                vc.viewModelBind(model)
+                vc.dataBind(data: ReportViewModel.Dependency.init(report: report, tag: tag))
             } else {
-                vc.viewModelBind(ReportViewModel.init())
+                vc.dataBind(data: ReportViewModel.Dependency.init())
 
             }
         }
@@ -80,7 +79,7 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath) as? ItemTableViewCell
         let data = viewModel.output.listData.value[indexPath.row]
-        cell?.llName.text = data.title
+        cell?.llName.text = data.userName
         cell?.llcontent.text = data.content
         return cell!
     }

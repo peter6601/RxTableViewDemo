@@ -17,8 +17,9 @@ protocol ReportViewControllerDelegate: class {
 }
 class ReportViewController: UIViewController {
     
-    @IBOutlet weak var ttName: UITextField!
-    @IBOutlet weak var ttContent: UITextField!
+
+    @IBOutlet weak var tfName: UITextField!
+    @IBOutlet weak var tfProblem: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     
     @IBAction func send(_ sender: UIButton) {
@@ -33,25 +34,20 @@ class ReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        
     }
     
-    func viewModelBind(_ viewModel: ReportViewModel) {
-        self.viewModel = viewModel
+    func dataBind(data: ReportViewModel.Dependency) {
+        self.viewModel = ReportViewModel.init(with: data)
     }
     
     private func bind() {
         viewModel.input.viewDidLoad()
         let sb = sendButton.rx.tap
-        let un = ttName.rx.text
-        let ct = ttContent.rx.text
-        
-        let output = ReportViewModel.Output.init(userName: un, problem: ct)
-        viewModel.bindOutput(with: output)
-        
-        let input = ReportViewModel.Input.init(didTapButton: sb.asObservable(), userName: un.asObservable(), problem: ct.asObservable())
-        viewModel.bind(with: input)
-        
+        let un = tfName.rx.text
+        let ct = tfProblem.rx.text
+        tfName.text = viewModel.dependency.report?.userName
+        tfProblem.text = viewModel.dependency.report?.content
+        un.asObservable().bind(to: viewModel.input.userName).disposed(by: disposeBag)
         viewModel.output.newReport.asObservable().subscribe(onNext: {  [weak self](dependency) in
             guard let report = dependency.report else {
                 return
@@ -64,5 +60,8 @@ class ReportViewController: UIViewController {
             self?.navigationController?.popViewController(animated: true)
             
         }).disposed(by: disposeBag)
+        viewModel.input.bindProblem(ct.asObservable())
+        viewModel.input.bindUserName(un.asObservable())
+        viewModel.input.bindtapButton(sb.asObservable())
     }
 }

@@ -70,7 +70,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYa-eB-w3F">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="problem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYa-eB-w3F">
                                         <rect key="frame" x="0.0" y="64.5" width="225" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -108,8 +108,8 @@
                     </view>
                     <connections>
                         <outlet property="sendButton" destination="ZBD-3K-6vx" id="kMI-0F-EGn"/>
-                        <outlet property="ttContent" destination="oeI-90-QD6" id="QuD-6t-G4i"/>
-                        <outlet property="ttName" destination="Kqs-1C-dUD" id="kd4-6M-df2"/>
+                        <outlet property="tfName" destination="Kqs-1C-dUD" id="fmK-Ea-bhC"/>
+                        <outlet property="tfProblem" destination="oeI-90-QD6" id="1Aa-LV-ohS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DnR-7l-6nT" userLabel="First Responder" sceneMemberID="firstResponder"/>

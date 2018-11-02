@@ -12,31 +12,73 @@ import RxCocoa
 
 protocol ReportViewModelInput {
     func viewDidLoad()
-    func bind(with bindings: ReportViewModel.Input)
+    var didTapButton: PublishSubject<Void> {get set}
+    var userName: BehaviorRelay<String?>  {get set}
+    var problem: BehaviorRelay<String?>  {get set}
+    func bindProblem(_ problem: Observable<String?>)
+    func bindUserName(_ userName: Observable<String?>)
+    func bindtapButton(_ didTapButton: Observable<Void>)
 }
-protocol ReprotViewModelOutout {
+
+protocol ReprotViewModelOutput {
     var newReport: PublishSubject<ReportViewModel.Dependency> {get set}
+
 }
 
-class ReportViewModel: ViewModelDependencyType, ReportViewModelInput, ReprotViewModelOutout  {
+protocol ReprotViewModelDependency {
+    var report: Report?  {get set}
+    var tag: Int?  {get set}
 
+}
+
+class ReportViewModel: ViewModelDependencyType, ReportViewModelInput, ReprotViewModelOutput {
+    
+    func bindProblem(_ problem: Observable<String?>) {
+        problem.subscribe(onNext: { [weak self](event) in
+            self?.problem.accept(event)
+        }).disposed(by: disposBag)
+    }
+    
+    func bindUserName(_ userName: Observable<String?>) {
+        userName.subscribe(onNext: { [weak self](user) in
+            self?.userName.accept(user)
+        }).disposed(by: disposBag)
+    }
+    
+    func bindtapButton(_ didTapButton: Observable<Void>) {
+        didTapButton.subscribe { [weak self](_) in
+            guard let _userName = self?.userName.value, let _problem = self?.problem.value , !_problem.isEmpty, !_userName.isEmpty  else {
+                return
+            }
+            guard var report = self?.dependency.report else {
+                let report = Report.init(title: _userName, content: _problem, userName: _userName, printScreen: nil)
+                let model = Dependency(report: report, tag: nil)
+                self?.output.newReport.onNext(model)
+                return
+            }
+            report.content = _problem
+            report.userName = _userName
+            let model = Dependency(report: report, tag: self?.dependency.tag)
+            self?.output.newReport.onNext(model)
+            }.disposed(by: disposBag)
+    }
+    
+
+    var didTapButton: PublishSubject<Void> = PublishSubject<Void>()
     var newReport = PublishSubject<ReportViewModel.Dependency>()
-    let userName: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
-    let content: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
-    typealias ViewModelInput = ReportViewModel.Input
+    var userName: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
+    var problem: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     let disposBag: DisposeBag = DisposeBag()
     var input: ReportViewModelInput { return self }
-    var output: ReprotViewModelOutout {return self }
+    var output: ReprotViewModelOutput {return self }
     var dependency: Dependency!
     
     required init(with dependency: Dependency) {
         self.dependency = dependency
-        self.userName.accept(dependency.report?.userName)
-        self.content.accept(dependency.report?.content)
     }
     
     init() {
-        self.dependency = ReportViewModel.Dependency(report: nil, tag: 0)
+        dependency = Dependency.init()
     }
     
     struct Dependency {
@@ -44,47 +86,7 @@ class ReportViewModel: ViewModelDependencyType, ReportViewModelInput, ReprotView
         var tag: Int?
     }
     
-    struct Input {
-        let didTapButton: Observable<Void>
-        let userName: Observable<String?>
-        let problem: Observable<String?>
-    }
-    
-    struct Output {
-        let userName: ControlProperty<String?>
-        let problem: ControlProperty<String?>
-    }
-    
     func viewDidLoad() {
         //API
-    }
-    
-    func bindOutput(with bindings: ReportViewModel.Output) {
-        self.content.bind(to: bindings.problem).dispose()
-        self.userName.bind(to: bindings.userName).dispose()
-    }
-    
-    func bind(with bindings: ReportViewModel.Input) {
-        
-        bindings.problem.subscribe(onNext: { [weak self](event) in
-            self?.content.accept(event)
-        }).disposed(by: disposBag)
-
-        bindings.userName.subscribe(onNext: { [weak self](user) in
-            self?.userName.accept(user)
-        }).disposed(by: disposBag)
-
-        bindings.didTapButton.subscribe { (_) in
-            guard var report = self.dependency.report else {
-                let report = Report.init(title: self.userName.value, content: self.content.value, userName: self.userName.value ?? "", printScreen: nil)
-                let model = Dependency(report: report, tag: nil)
-                self.output.newReport.onNext(model)
-                return
-            }
-            report.content = self.content.value
-            report.userName = self.userName.value
-            let model = Dependency(report: report, tag: self.dependency.tag)
-            self.output.newReport.onNext(model)
-        }.disposed(by: disposBag)
     }
 }

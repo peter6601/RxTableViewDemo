@@ -38,10 +38,8 @@ class MainViewModel: ViewModelDependencyType, ViewModelBindingType {
     
     func bind(_ bindings: Input) {
         let listData: BehaviorRelay<[Report]> = BehaviorRelay.init(value: [])      
-//        bindings.viewDidLoad.asObservable().subscribe(onNext: { (_) in
             let list = [Report(title: "Problem", content: "report content", userName: "reset", printScreen: nil)]
             listData.accept(list)
-//        }).disposed(by: disposeBag)
        output = Output.init(listData: listData)
     }
     
