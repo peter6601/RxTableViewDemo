@@ -10,6 +10,10 @@ import UIKit
 
 class InputTextFieldTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var llTitle: UILabel!
+    @IBOutlet weak var tfInput: UITextField!
+    @IBOutlet weak var llInfo: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

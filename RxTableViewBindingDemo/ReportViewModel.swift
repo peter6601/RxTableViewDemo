@@ -89,4 +89,8 @@ class ReportViewModel: ViewModelDependencyType, ReportViewModelInput, ReprotView
     func viewDidLoad() {
         //API
     }
+
+    func outputBind() {
+      
+    }
 }

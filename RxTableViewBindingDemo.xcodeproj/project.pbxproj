@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		080B60D16EAF4CA7D9921770 /* Pods_RxTableViewBindingDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E650964AB0E186F56C48839 /* Pods_RxTableViewBindingDemoUITests.framework */; };
+		2D54B59A218DFCBB006108A7 /* InputTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D54B598218DFCBB006108A7 /* InputTextFieldTableViewCell.swift */; };
+		2D54B59B218DFCBB006108A7 /* InputTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D54B599218DFCBB006108A7 /* InputTextFieldTableViewCell.xib */; };
+		2D54B59D218DFE7E006108A7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D54B59C218DFE7E006108A7 /* RegisterViewController.swift */; };
+		2D54B59F218E0182006108A7 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D54B59E218E0182006108A7 /* RegisterViewModel.swift */; };
 		4E7DFC9F8C78C5DAADBFEF94 /* Pods_RxTableViewBindingDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1017E975BCAA71DD19E3EDEE /* Pods_RxTableViewBindingDemoTests.framework */; };
 		63E59F772E86F56C77372101 /* Pods_RxTableViewBindingDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB81CB39925CDB339DB3915 /* Pods_RxTableViewBindingDemo.framework */; };
 		DA20256B2189498F004F6DE5 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20256A2189498F004F6DE5 /* ReportViewModel.swift */; };
@@ -53,6 +57,10 @@
 		1596EA6DBDC0FA38875DD84D /* Pods-RxTableViewBindingDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxTableViewBindingDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxTableViewBindingDemo/Pods-RxTableViewBindingDemo.release.xcconfig"; sourceTree = "<group>"; };
 		1E650964AB0E186F56C48839 /* Pods_RxTableViewBindingDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxTableViewBindingDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		227A705EFA8A73B52B7C0DD9 /* Pods-RxTableViewBindingDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxTableViewBindingDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxTableViewBindingDemoTests/Pods-RxTableViewBindingDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D54B598218DFCBB006108A7 /* InputTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		2D54B599218DFCBB006108A7 /* InputTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputTextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		2D54B59C218DFE7E006108A7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		2D54B59E218E0182006108A7 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		6BB81CB39925CDB339DB3915 /* Pods_RxTableViewBindingDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxTableViewBindingDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D541B1C93903869E400765C5 /* Pods-RxTableViewBindingDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxTableViewBindingDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxTableViewBindingDemo/Pods-RxTableViewBindingDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		DA20256A2189498F004F6DE5 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
@@ -163,7 +171,11 @@
 				DAD52DF62187F27A003C9F03 /* ReportViewController.swift */,
 				DA20256A2189498F004F6DE5 /* ReportViewModel.swift */,
 				DAD52DF42187F12F003C9F03 /* ViewModelType.swift */,
+				2D54B59C218DFE7E006108A7 /* RegisterViewController.swift */,
+				2D54B59E218E0182006108A7 /* RegisterViewModel.swift */,
 				DAD52DC82187ED78003C9F03 /* Main.storyboard */,
+				2D54B598218DFCBB006108A7 /* InputTextFieldTableViewCell.swift */,
+				2D54B599218DFCBB006108A7 /* InputTextFieldTableViewCell.xib */,
 				DAD52DF82187FD60003C9F03 /* ItemTableViewCell.swift */,
 				DAD52DF92187FD60003C9F03 /* ItemTableViewCell.xib */,
 				DAD52DCB2187ED7A003C9F03 /* Assets.xcassets */,
@@ -302,6 +314,7 @@
 			files = (
 				DAD52DFB2187FD60003C9F03 /* ItemTableViewCell.xib in Resources */,
 				DAD52DCF2187ED7A003C9F03 /* LaunchScreen.storyboard in Resources */,
+				2D54B59B218DFCBB006108A7 /* InputTextFieldTableViewCell.xib in Resources */,
 				DAD52DCC2187ED7A003C9F03 /* Assets.xcassets in Resources */,
 				DAD52DCA2187ED78003C9F03 /* Main.storyboard in Resources */,
 			);
@@ -421,8 +434,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D54B59A218DFCBB006108A7 /* InputTextFieldTableViewCell.swift in Sources */,
+				2D54B59D218DFE7E006108A7 /* RegisterViewController.swift in Sources */,
 				DA20256B2189498F004F6DE5 /* ReportViewModel.swift in Sources */,
 				DAD52DF72187F27A003C9F03 /* ReportViewController.swift in Sources */,
+				2D54B59F218E0182006108A7 /* RegisterViewModel.swift in Sources */,
 				DAD52DC72187ED78003C9F03 /* MainViewController.swift in Sources */,
 				DAD52DFF2188006B003C9F03 /* Report.swift in Sources */,
 				DAD52DFA2187FD60003C9F03 /* ItemTableViewCell.swift in Sources */,
