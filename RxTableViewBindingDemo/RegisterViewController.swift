@@ -27,7 +27,7 @@ class RegisterViewController: UIViewController {
         self.bindViewModel(list: nil)  
         self.btnRegister.addTarget(self, action: #selector(tap), for: .touchUpInside)
 //        self.viewModel.bindtapButton(self.btnRegister.rx.tap.asDriver())
-
+        self.viewModel.viewDidLoad()
     }
     
     @objc func tap() {
@@ -66,7 +66,14 @@ extension RegisterViewController: UITableViewDataSource {
             cell?.llTitle.text = title
             cell?.llInfo.text = info
             cell?.tfInput.rx.text.asDriver().drive(input).disposed(by: disposeBag)
-            let a = cell?.llInfo.rx.isHidden
+           viewModel.nameInfoisHidden.asDriver(onErrorJustReturn: false).drive(onNext: { (isHidden) in
+            UIView.setAnimationsEnabled(false)
+            tableView.beginUpdates()
+                cell?.llInfo.isHidden = isHidden
+            tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+
+            }).disposed(by: disposeBag)
             
             return cell!
 
